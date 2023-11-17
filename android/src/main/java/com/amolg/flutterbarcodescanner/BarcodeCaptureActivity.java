@@ -28,6 +28,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.media.MediaPlayer;
 
 import androidx.annotation.NonNull;
 
@@ -526,6 +527,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
             if (FlutterBarcodeScannerPlugin.isContinuousScan) {
                 FlutterBarcodeScannerPlugin.onBarcodeScanReceiver(barcode);
             } else {
+                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.beep);
+                mp.start();
                 Intent data = new Intent();
                 data.putExtra(BarcodeObject, barcode);
                 setResult(CommonStatusCodes.SUCCESS, data);
